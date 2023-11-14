@@ -1,7 +1,9 @@
 #include <stdio.h>
+
+#include "a.h"
 #include "polycreux.h"
 
-int main()
+void version_a()
 {
   int option;
   PolyCreux *poly = NULL;
@@ -14,7 +16,7 @@ int main()
     printf("3. L'affichage du polynôme dans l'ordre décroissant des puissances de x\n");
     printf("4. L'affichage du polynôme dans l'ordre croissant des puissances de x\n");
     printf("5. La destruction du polynôme\n");
-    printf("0. Exit\n");
+    printf("0. Exit version A\n");
 
     printf("> ");
     scanf("%d", &option);
@@ -77,6 +79,4 @@ int main()
 
     printf("------------------------\n\n");
   } while (option != 0);
-
-  return 0;
 }
