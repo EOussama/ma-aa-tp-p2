@@ -40,6 +40,7 @@ void version_b()
     printf("3. La multiplication d'un polynôme par un scalaire (entier)\n");
     printf("4. La multiplication d'un polynôme par un monôme\n");
     printf("5. La somme de deux polynômes\n");
+    printf("6. La soustraction de deux polynômes\n");
     printf("0. Exit version B\n");
 
     printf("> ");
@@ -96,13 +97,26 @@ void version_b()
     {
       PolyCreux *p3 = SommePolynome(p1, p2);
       
-      printf("La somme de [ p1(x) = ");
+      printf("La somme de \np1(x) = ");
       PrintDesc(p1);
-      printf("] et [ p2(x) = ");
+      printf("\net \np2(x) = ");
       PrintDesc(p2);
-      printf("] est [ p3(x) = ");
+      printf("\nest \np3(x) = ");
       PrintDesc(p3);
-      printf("]\n");
+      printf("\n");
+      break;
+    }
+    case 6:
+    {
+      PolyCreux *p3 = SoustractionPolynome(p1, p2);
+      
+      printf("La soustraction de \np1(x) = ");
+      PrintDesc(p1);
+      printf("\net \np2(x) = ");
+      PrintDesc(p2);
+      printf("\nest \np3(x) = ");
+      PrintDesc(p3);
+      printf("\n");
       break;
     }
     case 0:

@@ -251,7 +251,6 @@ PolyCreux *SommePolynome(PolyCreux *p1, PolyCreux *p2)
       }
       else
       {
-        // Terms have the same degree, add their coefficients
         newTerm->degre = current1->degre;
         newTerm->coefficient = current1->coefficient + current2->coefficient;
         current1 = current1->PDroite;
@@ -268,6 +267,78 @@ PolyCreux *SommePolynome(PolyCreux *p1, PolyCreux *p2)
     {
       newTerm->degre = current2->degre;
       newTerm->coefficient = current2->coefficient;
+      current2 = current2->PDroite;
+    }
+
+    if (result == NULL)
+    {
+      result = newTerm;
+    }
+    else
+    {
+      PolyCreux *lastTerm = result;
+      while (lastTerm->PDroite != NULL)
+      {
+        lastTerm = lastTerm->PDroite;
+      }
+      lastTerm->PDroite = newTerm;
+      newTerm->PGauche = lastTerm;
+    }
+  }
+
+  return result;
+}
+
+PolyCreux *SoustractionPolynome(PolyCreux *p1, PolyCreux *p2)
+{
+  PolyCreux *result = NULL;
+  PolyCreux *current1 = p1;
+  PolyCreux *current2 = p2;
+
+  while (current1 != NULL || current2 != NULL)
+  {
+    PolyCreux *newTerm = (PolyCreux *)malloc(sizeof(PolyCreux));
+    if (newTerm == NULL)
+    {
+      DestroyPolyCreux(&result);
+      return NULL;
+    }
+
+    newTerm->PGauche = NULL;
+    newTerm->PDroite = NULL;
+
+    if (current1 != NULL && current2 != NULL)
+    {
+      if (current1->degre > current2->degre)
+      {
+        newTerm->degre = current1->degre;
+        newTerm->coefficient = current1->coefficient;
+        current1 = current1->PDroite;
+      }
+      else if (current1->degre < current2->degre)
+      {
+        newTerm->degre = current2->degre;
+        newTerm->coefficient = -current2->coefficient;
+        current2 = current2->PDroite;
+      }
+      else
+      {
+        newTerm->degre = current1->degre;
+        newTerm->coefficient = current1->coefficient - current2->coefficient;
+        current1 = current1->PDroite;
+        current2 = current2->PDroite;
+      }
+    }
+    else if (current1 != NULL)
+    {
+      newTerm->degre = current1->degre;
+      newTerm->coefficient = current1->coefficient;
+      current1 = current1->PDroite;
+    }
+    else if (current2 != NULL)
+    {
+      newTerm->degre = current2->degre;
+      newTerm->coefficient = -current2->coefficient;
       current2 = current2->PDroite;
     }
 
