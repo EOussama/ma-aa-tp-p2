@@ -45,4 +45,6 @@ void MultiplicationScalaire(PolyCreux *poly, int scalar);
 
 void MultiplicationMonome(PolyCreux *poly, int degre, int coefficient);
 
+PolyCreux *SommePolynome(PolyCreux *p1, PolyCreux *p2);
+
 #endif
