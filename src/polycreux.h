@@ -43,4 +43,6 @@ int GetMaxDegre(PolyCreux *poly);
 
 void MultiplicationScalaire(PolyCreux *poly, int scalar);
 
+void MultiplicationMonome(PolyCreux *poly, int degre, int coefficient);
+
 #endif

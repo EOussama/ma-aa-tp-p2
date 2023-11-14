@@ -204,3 +204,15 @@ void MultiplicationScalaire(PolyCreux *poly, int scalar)
     current = current->PDroite;
   }
 }
+
+void MultiplicationMonome(PolyCreux *poly, int degre, int coefficient)
+{
+  PolyCreux *current = poly;
+
+  while (current != NULL)
+  {
+    current->degre += degre;
+    current->coefficient *= coefficient;
+    current = current->PDroite;
+  }
+}

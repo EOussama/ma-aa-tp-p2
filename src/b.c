@@ -14,6 +14,7 @@ void version_b()
     printf("1. Insertion d'un monôme dans l'ordre décroissant des puissances de x\n");
     printf("2. L'affichage du polynôme dans l'ordre décroissant des puissances de x\n");
     printf("3. La multiplication d'un polynôme par un scalaire (entier)\n");
+    printf("4. La multiplication d'un polynôme par un monôme\n");
     printf("0. Exit version B\n");
 
     printf("> ");
@@ -46,10 +47,24 @@ void version_b()
       case 3:
       {
         int scalaire;
-        printf("Entrer le scalaire : ", scalaire);
+
+        printf("Entrer le scalaire : ");
         scanf("%d", &scalaire);
 
         MultiplicationScalaire(poly, scalaire);
+        break;
+      }
+      case 4:
+      {
+        int degre, coefficient;
+
+        printf("Entrer le degré du monôme : ");
+        scanf("%d", &degre);
+        
+        printf("Entrer le coefficient du monôme :");
+        scanf("%d", &coefficient);
+
+        MultiplicationMonome(poly, degre, coefficient);
         break;
       }
       case 0:
