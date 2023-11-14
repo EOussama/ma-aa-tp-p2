@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 #include <stdbool.h>
 
 #include "polycreux.h"
@@ -53,15 +54,19 @@ PolyCreux *ConvertArray(PolyCreux *poly)
   return monomesArray;
 }
 
-void InsertMonome(PolyCreux *poly, int degre, int coefficient)
+void InsertMonome(PolyCreux **poly, int degre, int coefficient)
 {
-  if (poly != NULL)
+  if (*poly != NULL)
   {
-    PolyCreux *lastPoly = GetLastMonome(poly);
+    PolyCreux *lastPoly = GetLastMonome(*poly);
     PolyCreux *newPoly = CreateMonome(degre, coefficient);
 
     lastPoly->PDroite = newPoly;
     newPoly->PGauche = lastPoly;
+  }
+  else
+  {
+    *poly = CreateMonome(degre, coefficient);
   }
 }
 
@@ -94,9 +99,9 @@ void DeleteMonome(PolyCreux *poly, int degre)
   }
 }
 
-void DestroyPolyCreux(PolyCreux *poly)
+void DestroyPolyCreux(PolyCreux **poly)
 {
-  PolyCreux *current = poly;
+  PolyCreux *current = *poly;
   PolyCreux *next;
 
   while (current != NULL)
@@ -106,7 +111,7 @@ void DestroyPolyCreux(PolyCreux *poly)
     current = next;
   }
 
-  free(next);
+  *poly = NULL;
 }
 
 void PrintMonome(PolyCreux poly)
@@ -166,4 +171,21 @@ int CompareDegreesDesc(const void *a, const void *b)
 int CompareDegreesAsc(const void *a, const void *b)
 {
   return ((PolyCreux *)a)->degre - ((PolyCreux *)b)->degre;
+}
+
+int GetMaxDegre(PolyCreux *poly)
+{
+  int minDegree = INT_MAX;
+
+  while (poly != NULL)
+  {
+    if (poly->degre < minDegree)
+    {
+      minDegree = poly->degre;
+    }
+
+    poly = poly->PDroite;
+  }
+
+  return minDegree;
 }
