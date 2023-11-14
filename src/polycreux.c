@@ -112,7 +112,6 @@ void DestroyPolyCreux(PolyCreux *poly)
 void PrintMonome(PolyCreux poly)
 {
   printf("+ %dx^%d ", poly.coefficient, poly.degre);
-  printf("address: %p\n", poly.PDroite);
 }
 
 void PrintDesc(PolyCreux *poly)
