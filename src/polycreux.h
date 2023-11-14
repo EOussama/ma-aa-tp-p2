@@ -1,6 +1,8 @@
 #ifndef POLYCREUX_H
 #define POLYCREUX_H
 
+// Structure -------------------------
+
 typedef struct PolyCreux
 {
   int degre;
@@ -8,6 +10,8 @@ typedef struct PolyCreux
   struct PolyCreux *PGauche;
   struct PolyCreux *PDroite;
 } PolyCreux;
+
+// Version A -------------------------
 
 PolyCreux *CreateMonome(int degre, int coefficient);
 
@@ -34,5 +38,9 @@ int CompareDegreesDesc(const void *a, const void *b);
 int CompareDegreesAsc(const void *a, const void *b);
 
 int GetMaxDegre(PolyCreux *poly);
+
+// Version B ------------------------
+
+void MultiplicationScalaire(PolyCreux *poly, int scalar);
 
 #endif

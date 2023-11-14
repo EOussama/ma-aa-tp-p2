@@ -5,6 +5,8 @@
 
 #include "polycreux.h"
 
+// Version A -------------------------
+
 PolyCreux *CreateMonome(int degre, int coefficient)
 {
   PolyCreux *monome = (PolyCreux *)malloc(sizeof(PolyCreux));
@@ -188,4 +190,17 @@ int GetMaxDegre(PolyCreux *poly)
   }
 
   return minDegree;
+}
+
+// Version B ---------------------------
+
+void MultiplicationScalaire(PolyCreux *poly, int scalar)
+{
+  PolyCreux *current = poly;
+
+  while (current != NULL)
+  {
+    current->coefficient *= scalar;
+    current = current->PDroite;
+  }
 }
