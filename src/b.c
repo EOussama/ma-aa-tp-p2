@@ -42,6 +42,8 @@ void version_b()
     printf("5. La somme de deux polynômes\n");
     printf("6. La soustraction de deux polynômes\n");
     printf("7. Le produit de deux polynômes\n");
+    printf("8. L'évaluation de p1 et p2 polynôme en -2\n");
+    printf("9. L'évaluation d'une polynôme en une données x entrée au clavier\n");
     printf("0. Exit version B\n");
 
     printf("> ");
@@ -49,100 +51,135 @@ void version_b()
 
     switch (option)
     {
-    case 1:
-    {
-      int degre, coefficient;
-      int maxDegre = GetMaxDegre(poly);
-
-      do
+      case 1:
       {
-        printf("Entrer le degré (doit être plus petit que %d): ", maxDegre);
+        int degre, coefficient;
+        int maxDegre = GetMaxDegre(poly);
+
+        do
+        {
+          printf("Entrer le degré (doit être plus petit que %d): ", maxDegre);
+          scanf("%d", &degre);
+        } while (degre >= maxDegre);
+
+        printf("Entrer le coefficient : ");
+        scanf("%d", &coefficient);
+
+        InsertMonome(&poly, degre, coefficient);
+        break;
+      }
+      case 2:
+      {
+        PrintDesc(poly);
+        break;
+      }
+      case 3:
+      {
+        int scalaire;
+
+        printf("Entrer le scalaire : ");
+        scanf("%d", &scalaire);
+
+        MultiplicationScalaire(poly, scalaire);
+        break;
+      }
+      case 4:
+      {
+        int degre, coefficient;
+
+        printf("Entrer le degré du monôme : ");
         scanf("%d", &degre);
-      } while (degre >= maxDegre);
 
-      printf("Entrer le coefficient : ");
-      scanf("%d", &coefficient);
+        printf("Entrer le coefficient du monôme :");
+        scanf("%d", &coefficient);
 
-      InsertMonome(&poly, degre, coefficient);
-      break;
-    }
-    case 2:
-    {
-      PrintDesc(poly);
-      break;
-    }
-    case 3:
-    {
-      int scalaire;
+        MultiplicationMonome(poly, degre, coefficient);
+        break;
+      }
+      case 5:
+      {
+        PolyCreux *p3 = SommePolynome(p1, p2);
 
-      printf("Entrer le scalaire : ");
-      scanf("%d", &scalaire);
+        printf("La somme de \np1(x) = ");
+        PrintDesc(p1);
+        printf("\net \np2(x) = ");
+        PrintDesc(p2);
+        printf("\nest \np3(x) = ");
+        PrintDesc(p3);
+        printf("\n");
+        break;
+      }
+      case 6:
+      {
+        PolyCreux *p3 = SoustractionPolynome(p1, p2);
 
-      MultiplicationScalaire(poly, scalaire);
-      break;
-    }
-    case 4:
-    {
-      int degre, coefficient;
+        printf("La soustraction de \np1(x) = ");
+        PrintDesc(p1);
+        printf("\net \np2(x) = ");
+        PrintDesc(p2);
+        printf("\nest \np3(x) = ");
+        PrintDesc(p3);
+        printf("\n");
+        break;
+      }
+      case 7:
+      {
+        PolyCreux *p3 = ProduitPolynome(p1, p2);
 
-      printf("Entrer le degré du monôme : ");
-      scanf("%d", &degre);
+        printf("Le produit de \np1(x) = ");
+        PrintDesc(p1);
+        printf("\net \np2(x) = ");
+        PrintDesc(p2);
+        printf("\nest \np3(x) = ");
+        PrintDesc(p3);
+        printf("\n");
+        break;
+      }
+      case 8:
+      {
+        long p1Resultat = EvaluationPolynome(p1, -2);
+        long p2Resultat = EvaluationPolynome(p2, -2);
 
-      printf("Entrer le coefficient du monôme :");
-      scanf("%d", &coefficient);
+        printf("[ p1(x) = ");
+        PrintDesc(p1);
+        printf("] en -2 est %ld\n", p1Resultat);
 
-      MultiplicationMonome(poly, degre, coefficient);
-      break;
-    }
-    case 5:
-    {
-      PolyCreux *p3 = SommePolynome(p1, p2);
-      
-      printf("La somme de \np1(x) = ");
-      PrintDesc(p1);
-      printf("\net \np2(x) = ");
-      PrintDesc(p2);
-      printf("\nest \np3(x) = ");
-      PrintDesc(p3);
-      printf("\n");
-      break;
-    }
-    case 6:
-    {
-      PolyCreux *p3 = SoustractionPolynome(p1, p2);
-      
-      printf("La soustraction de \np1(x) = ");
-      PrintDesc(p1);
-      printf("\net \np2(x) = ");
-      PrintDesc(p2);
-      printf("\nest \np3(x) = ");
-      PrintDesc(p3);
-      printf("\n");
-      break;
-    }
-    case 7:
-    {
-      PolyCreux *p3 = ProduitPolynome(p1, p2);
-      
-      printf("Le produit de \np1(x) = ");
-      PrintDesc(p1);
-      printf("\net \np2(x) = ");
-      PrintDesc(p2);
-      printf("\nest \np3(x) = ");
-      PrintDesc(p3);
-      printf("\n");
-      break;
-    }
-    case 0:
-    {
-      printf("Fin du version B.\n");
-      break;
-    }
-    default:
-    {
-      printf("Option invalide.\n");
-      break;
-    }
+        printf("[ p2(x) = ");
+        PrintDesc(p2);
+        printf("] en -2 est %ld\n", p2Resultat);
+
+        break;
+      }
+      case 9:
+      {
+        int x;
+
+        printf("Entrer une valeur pour x : ");
+        scanf("%d", &x);
+
+        long p1Resultat = EvaluationPolynome(p1, x);
+        long p2Resultat = EvaluationPolynome(p2, x);
+
+        printf("[ p1(x) = ");
+        PrintDesc(p1);
+        printf("] en %d est %ld\n", x, p1Resultat);
+
+        printf("[ p2(x) = ");
+        PrintDesc(p2);
+        printf("] en %d est %ld\n", x, p2Resultat);
+
+        break;
+      }
+      case 0:
+      {
+        printf("Fin du version B.\n");
+        break;
+      }
+      default:
+      {
+        printf("Option invalide.\n");
+        break;
+      }
     }
 
     printf("------------------------\n\n");

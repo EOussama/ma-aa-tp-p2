@@ -1,3 +1,4 @@
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
@@ -418,6 +419,21 @@ PolyCreux *ProduitPolynome(PolyCreux *p1, PolyCreux *p2)
     }
 
     current1 = current1->PDroite;
+  }
+
+  return result;
+}
+
+long EvaluationPolynome(PolyCreux *poly, int x)
+{
+  long result = 0;
+
+  PolyCreux *current = poly;
+
+  while (current != NULL)
+  {
+    result += current->coefficient * pow(x, current->degre);
+    current = current->PDroite;
   }
 
   return result;

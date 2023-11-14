@@ -51,4 +51,6 @@ PolyCreux *SoustractionPolynome(PolyCreux *p1, PolyCreux *p2);
 
 PolyCreux *ProduitPolynome(PolyCreux *p1, PolyCreux *p2);
 
+long EvaluationPolynome(PolyCreux *poly, int x);
+
 #endif
