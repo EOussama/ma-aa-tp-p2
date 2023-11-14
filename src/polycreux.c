@@ -360,3 +360,65 @@ PolyCreux *SoustractionPolynome(PolyCreux *p1, PolyCreux *p2)
 
   return result;
 }
+
+PolyCreux *ProduitPolynome(PolyCreux *p1, PolyCreux *p2)
+{
+  PolyCreux *result = NULL;
+  PolyCreux *current1 = p1;
+
+  while (current1 != NULL)
+  {
+    PolyCreux *current2 = p2;
+    while (current2 != NULL)
+    {
+      PolyCreux *newTerm = (PolyCreux *)malloc(sizeof(PolyCreux));
+      if (newTerm == NULL)
+      {
+        DestroyPolyCreux(&result);
+        return NULL;
+      }
+
+      newTerm->PGauche = NULL;
+      newTerm->PDroite = NULL;
+
+      newTerm->degre = current1->degre + current2->degre;
+      newTerm->coefficient = current1->coefficient * current2->coefficient;
+
+      if (result == NULL)
+      {
+        result = newTerm;
+      }
+      else
+      {
+        PolyCreux *existingTerm = result;
+        while (existingTerm != NULL)
+        {
+          if (existingTerm->degre == newTerm->degre)
+          {
+            existingTerm->coefficient += newTerm->coefficient;
+            free(newTerm);
+            break;
+          }
+          existingTerm = existingTerm->PDroite;
+        }
+
+        if (existingTerm == NULL)
+        {
+          PolyCreux *lastTerm = result;
+          while (lastTerm->PDroite != NULL)
+          {
+            lastTerm = lastTerm->PDroite;
+          }
+          lastTerm->PDroite = newTerm;
+          newTerm->PGauche = lastTerm;
+        }
+      }
+
+      current2 = current2->PDroite;
+    }
+
+    current1 = current1->PDroite;
+  }
+
+  return result;
+}

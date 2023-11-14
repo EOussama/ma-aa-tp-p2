@@ -49,4 +49,6 @@ PolyCreux *SommePolynome(PolyCreux *p1, PolyCreux *p2);
 
 PolyCreux *SoustractionPolynome(PolyCreux *p1, PolyCreux *p2);
 
+PolyCreux *ProduitPolynome(PolyCreux *p1, PolyCreux *p2);
+
 #endif

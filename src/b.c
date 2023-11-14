@@ -41,6 +41,7 @@ void version_b()
     printf("4. La multiplication d'un polynôme par un monôme\n");
     printf("5. La somme de deux polynômes\n");
     printf("6. La soustraction de deux polynômes\n");
+    printf("7. Le produit de deux polynômes\n");
     printf("0. Exit version B\n");
 
     printf("> ");
@@ -111,6 +112,19 @@ void version_b()
       PolyCreux *p3 = SoustractionPolynome(p1, p2);
       
       printf("La soustraction de \np1(x) = ");
+      PrintDesc(p1);
+      printf("\net \np2(x) = ");
+      PrintDesc(p2);
+      printf("\nest \np3(x) = ");
+      PrintDesc(p3);
+      printf("\n");
+      break;
+    }
+    case 7:
+    {
+      PolyCreux *p3 = ProduitPolynome(p1, p2);
+      
+      printf("Le produit de \np1(x) = ");
       PrintDesc(p1);
       printf("\net \np2(x) = ");
       PrintDesc(p2);
