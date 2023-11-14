@@ -67,7 +67,7 @@ void version_a()
       }
       case 0:
       {
-        printf("Fin du programme.\n");
+        printf("Fin du version A.\n");
         break;
       }
       default:
